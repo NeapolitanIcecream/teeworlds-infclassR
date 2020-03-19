@@ -22,3 +22,4 @@ src/game/generated
 /infclass_srv*
 /infclass_editor*
 /bin/server_d
+push.sh
