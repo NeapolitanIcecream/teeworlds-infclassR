@@ -350,13 +350,12 @@ void CCharacter::HandleNinja()
 	{
 		// Enhance velocity
 		m_Core.m_Vel = m_DartDir*int(m_DartOldVelAmount * 1.5f);
-		// Debug
-		m_IsInvisible = false;
+		// Test
+		// m_IsInvisible = false;
 	}
 
 	if (m_DartLifeSpan > 0)
-	{
-		// Debug
+	{   // Test
 		m_IsInvisible = true;
 		// Set velocity
 		float VelocityBuff = min(1.0f + static_cast<float>(m_NinjaVelocityBuff)/10.0f, 2.0f);
