@@ -348,15 +348,16 @@ void CCharacter::HandleNinja()
 
 	if (m_DartLifeSpan == 0)
 	{
-		// reset velocity
-		m_Core.m_Vel = m_DartDir*m_DartOldVelAmount*2;
+		// Enhance velocity
+		m_Core.m_Vel = m_DartDir*int(m_DartOldVelAmount * 1.5f);
 	}
 
 	if (m_DartLifeSpan > 0)
 	{
 		// Set velocity
 		float VelocityBuff = min(1.0f + static_cast<float>(m_NinjaVelocityBuff)/10.0f, 2.0f);
-		float DamageRate = 1;
+		// Set DamageRate
+		float DamageRate = 0.5f + m_DartOldVelAmount / 20.0f;
 		printf("[Debug] %d\n", m_DartOldVelAmount);
 		m_Core.m_Vel = m_DartDir * g_pData->m_Weapons.m_Ninja.m_Velocity * VelocityBuff;
 		vec2 OldPos = m_Pos;
@@ -398,7 +399,7 @@ void CCharacter::HandleNinja()
 				if(m_NumObjectsHit < 10)
 					m_apHitObjects[m_NumObjectsHit++] = aEnts[i];
 
-				aEnts[i]->TakeDamage(vec2(0, -10.0f), int(min(g_pData->m_Weapons.m_Ninja.m_pBase->m_Damage + m_NinjaStrengthBuff, 20) * DamageRate), m_pPlayer->GetCID(), WEAPON_NINJA, TAKEDAMAGEMODE_NOINFECTION);
+				aEnts[i]->TakeDamage(vec2(0, -10.0f), min(int((g_pData->m_Weapons.m_Ninja.m_pBase->m_Damage + m_NinjaStrengthBuff) * DamageRate), 20), m_pPlayer->GetCID(), WEAPON_NINJA, TAKEDAMAGEMODE_NOINFECTION);
 			}
 		}
 	}
