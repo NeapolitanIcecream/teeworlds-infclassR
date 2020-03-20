@@ -3101,7 +3101,7 @@ void CCharacter::Snap(int SnappingClient)
 
 	if(GetClass() == PLAYERCLASS_NINJA)
 	{
-		if(m_IsInvisible) return;
+		if(pClient->IsZombie() && m_IsInvisible) return;
 	}
 	
 	if(m_Armor < 10 && SnappingClient != m_pPlayer->GetCID() && IsHuman() && GetClass() != PLAYERCLASS_HERO)
