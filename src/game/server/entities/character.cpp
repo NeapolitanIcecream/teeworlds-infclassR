@@ -400,7 +400,7 @@ void CCharacter::HandleNinja()
 
 				aEnts[i]->TakeDamage(vec2(0, -10.0f), min(int((g_pData->m_Weapons.m_Ninja.m_pBase->m_Damage + m_NinjaStrengthBuff) * DamageRate), 20), m_pPlayer->GetCID(), WEAPON_NINJA, TAKEDAMAGEMODE_NOINFECTION);
 				// Recover ninja jump
-				m_DartLeft = min(m_DartLef + 1, g_Config.m_InfNinjaJump);
+				m_DartLeft = min(m_DartLeft + 1, g_Config.m_InfNinjaJump);
 			}
 		}
 	}
