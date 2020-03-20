@@ -351,7 +351,7 @@ void CCharacter::HandleNinja()
 		// Enhance velocity
 		m_Core.m_Vel = m_DartDir*int(m_DartOldVelAmount * 1.5f);
 		// Test
-		// m_IsInvisible = false;
+		m_IsInvisible = false;
 	}
 
 	if (m_DartLifeSpan > 0)
@@ -3097,6 +3097,11 @@ void CCharacter::Snap(int SnappingClient)
 	if(GetClass() == PLAYERCLASS_GHOST)
 	{
 		if(!pClient->IsZombie() && m_IsInvisible) return;
+	}
+
+	if(GetClass() == PLAYERCLASS_NINJA)
+	{
+		if(m_IsInvisible) return;
 	}
 	
 	if(m_Armor < 10 && SnappingClient != m_pPlayer->GetCID() && IsHuman() && GetClass() != PLAYERCLASS_HERO)
