@@ -349,14 +349,15 @@ void CCharacter::HandleNinja()
 	if (m_DartLifeSpan == 0)
 	{
 		// reset velocity
-		m_Core.m_Vel = m_DartDir*m_DartOldVelAmount;
+		m_Core.m_Vel = m_DartDir*m_DartOldVelAmount*2;
 	}
 
 	if (m_DartLifeSpan > 0)
 	{
 		// Set velocity
-		float VelocityBuff = min(0.5f + static_cast<float>(m_NinjaVelocityBuff)/10.0f, 2.0f) * 2.0f;
-		float DamageRate = VelocityBuff * 0.75f;
+		float VelocityBuff = min(1.0f + static_cast<float>(m_NinjaVelocityBuff)/10.0f, 2.0f);
+		float DamageRate = 1;
+		printf("[Debug] %d\n", m_DartOldVelAmount);
 		m_Core.m_Vel = m_DartDir * g_pData->m_Weapons.m_Ninja.m_Velocity * VelocityBuff;
 		vec2 OldPos = m_Pos;
 		GameServer()->Collision()->MoveBox(&m_Core.m_Pos, &m_Core.m_Vel, vec2(m_ProximityRadius, m_ProximityRadius), 0.f);
