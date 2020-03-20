@@ -352,7 +352,6 @@ void CCharacter::HandleNinja()
 		m_Core.m_Vel = m_DartDir*int(m_DartOldVelAmount * 1.5f);
 		// Test
 		m_IsInvisible = false;
-		GameServer()->CreatePlayerSpawn(m_Pos);
 	}
 
 	if (m_DartLifeSpan > 0)
