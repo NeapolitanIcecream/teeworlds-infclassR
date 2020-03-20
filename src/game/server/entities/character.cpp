@@ -358,7 +358,6 @@ void CCharacter::HandleNinja()
 		float VelocityBuff = min(1.0f + static_cast<float>(m_NinjaVelocityBuff)/10.0f, 2.0f);
 		// Set DamageRate
 		float DamageRate = 0.5f + m_DartOldVelAmount / 20.0f;
-		printf("[Debug] %d\n", m_DartOldVelAmount);
 		m_Core.m_Vel = m_DartDir * g_pData->m_Weapons.m_Ninja.m_Velocity * VelocityBuff;
 		vec2 OldPos = m_Pos;
 		GameServer()->Collision()->MoveBox(&m_Core.m_Pos, &m_Core.m_Vel, vec2(m_ProximityRadius, m_ProximityRadius), 0.f);
@@ -400,6 +399,8 @@ void CCharacter::HandleNinja()
 					m_apHitObjects[m_NumObjectsHit++] = aEnts[i];
 
 				aEnts[i]->TakeDamage(vec2(0, -10.0f), min(int((g_pData->m_Weapons.m_Ninja.m_pBase->m_Damage + m_NinjaStrengthBuff) * DamageRate), 20), m_pPlayer->GetCID(), WEAPON_NINJA, TAKEDAMAGEMODE_NOINFECTION);
+				// Recover ninja jump
+				m_DartLeft = min(m_DartLef + 1, g_Config.m_InfNinjaJump);
 			}
 		}
 	}
