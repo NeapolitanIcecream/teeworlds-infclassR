@@ -528,6 +528,7 @@ void CGameControllerMOD::Snap(int SnappingClient)
 				case PLAYERCLASS_NINJA:
 				case PLAYERCLASS_MERCENARY:
 				case PLAYERCLASS_SNIPER:
+				case PLAYERCLASS_SPY:
 					Support++;
 					break;
 				case PLAYERCLASS_ENGINEER:
@@ -1045,6 +1046,7 @@ bool CGameControllerMOD::IsChoosableClass(int PlayerClass)
 		case PLAYERCLASS_SOLDIER:
 		case PLAYERCLASS_SCIENTIST:
 		case PLAYERCLASS_BIOLOGIST:
+		case PLAYERCLASS_SPY:
 			return (nbDefender < g_Config.m_InfDefenderLimit);
 		case PLAYERCLASS_MEDIC:
 			return (nbMedic < g_Config.m_InfMedicLimit);
