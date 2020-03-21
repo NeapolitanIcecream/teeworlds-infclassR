@@ -657,10 +657,8 @@ void CPlayer::SetClassSkin(int newClass, int State)
 			break;
 		// [Spy] Temporarily use the skin of hunter
 		case PLAYERCLASS_SPY:
-			m_TeeInfos.m_UseCustomColor = 1;
+			m_TeeInfos.m_UseCustomColor = 0;
 			str_copy(m_TeeInfos.m_SkinName, "warpaint", sizeof(m_TeeInfos.m_SkinName));
-			m_TeeInfos.m_ColorBody = 3866368;
-			m_TeeInfos.m_ColorFeet = 65414;
 			break;
 		case PLAYERCLASS_SMOKER:
 			m_TeeInfos.m_UseCustomColor = 1;
