@@ -1065,7 +1065,29 @@ void CCharacter::FireWeapon()
 
 		case WEAPON_GUN:
 		{
-			if(GetClass() == PLAYERCLASS_MERCENARY)
+			if (GetClass() == PLAYERCLASS_SPY)
+			{
+				CProjectile *pProj = new CProjectile(GameWorld(), WEAPON_GUN,
+					m_pPlayer->GetCID(),
+					ProjStartPos,
+					Direction,
+					(int)(Server()->TickSpeed()*GameServer()->Tuning()->m_GunLifetime),
+					1 + m_SpyDamageBuff, 0, 0, -1, WEAPON_GUN);
+
+				// pack the Projectile and send it to the client Directly
+				CNetObj_Projectile p;
+				pProj->FillInfo(&p);
+
+				CMsgPacker Msg(NETMSGTYPE_SV_EXTRAPROJECTILE);
+				Msg.AddInt(1);
+				for(unsigned i = 0; i < sizeof(CNetObj_Projectile)/sizeof(int); i++)
+					Msg.AddInt(((int *)&p)[i]);
+
+				Server()->SendMsg(&Msg, MSGFLAG_VITAL, m_pPlayer->GetCID());
+
+				GameServer()->CreateSound(m_Pos, SOUND_GUN_FIRE);
+			}
+			else if(GetClass() == PLAYERCLASS_MERCENARY)
 			{
 				CProjectile *pProj = new CProjectile(GameWorld(), WEAPON_GUN,
 					m_pPlayer->GetCID(),
@@ -1885,6 +1907,12 @@ void CCharacter::Tick()
 		else
 		{
 			m_IsInvisible = true;
+			int Seconds = g_Config.m_InfSpyHideTime - (Server()->Tick() - m_InvisibleTick);
+			GameServer()->SendBroadcast_Localization(GetPlayer()->GetCID(), BROADCAST_PRIORITY_WEAPONSTATE, BROADCAST_DURATION_REALTIME,
+				_("Hide: {sec:RemainingTime}"),
+				"RemainingTime", &Seconds,
+				NULL
+			);
 		}
 	}
 	
@@ -3438,6 +3466,15 @@ int CCharacter::GetClass()
 		return PLAYERCLASS_NONE;
 	else
 		return m_pPlayer->GetClass();
+}
+
+void CCharacter::GiveSpyBuf()
+{
+	if(GetClass() != PLAYERCLASS_SPY)
+		return;
+
+	m_SpyDamageBuff++;
+	GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_SCORE, _("Spy damage increased"), NULL);
 }
 
 void CCharacter::GiveNinjaBuf()

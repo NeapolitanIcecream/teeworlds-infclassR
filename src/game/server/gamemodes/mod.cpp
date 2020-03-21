@@ -668,6 +668,11 @@ int CGameControllerMOD::OnCharacterDeath(class CCharacter *pVictim, class CPlaye
 					pKiller->GetCharacter()->IncreaseHealth(4);
 				}
 			}
+
+			if (pKiller->GetClass() == PLAYERCLASS_SPY && pKiller->GetCharacter())
+			{
+				pKiller->GetCharacter()->GiveNinjaBuf();
+			}
 		}
 	}
 		
