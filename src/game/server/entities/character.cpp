@@ -695,7 +695,8 @@ void CCharacter::FireWeapon()
 				}
 			}
 			else if(GetClass() == PLAYERCLASS_SPY) {
-				// [Spy] todo
+				m_IsInvisible = true
+				m_InvisibleTick = Server()->Tick();
 			}
 			else if(GetClass() == PLAYERCLASS_LOOPER)
 			{
@@ -1871,6 +1872,19 @@ void CCharacter::Tick()
 	{
 		m_InAirTick = 0;
 	}
+
+	// Spy
+	if(GetClass() == PLAYERCLASS_SPY)
+	{
+		if(Server()->Tick() > m_InvisibleTick + m_InfSpyHideTime*Server()->TickSpeed())
+		{
+			m_IsInvisible = false;
+		}
+		else
+		{
+			m_IsInvisible = true;
+		}
+	}
 	
 	//Ghost
 	if(GetClass() == PLAYERCLASS_GHOST)
@@ -2642,7 +2656,7 @@ void CCharacter::TickDefered()
 
 
 	if(Events&COREEVENT_HOOK_ATTACH_PLAYER) GameServer()->CreateSound(m_Pos, SOUND_HOOK_ATTACH_PLAYER, CmaskAll());
-	if(GetClass() != PLAYERCLASS_GHOST || !m_IsInvisible)
+	if((GetClass() != PLAYERCLASS_GHOST && GetClass() != PLAYERCLASS_SPY) || !m_IsInvisible)
 	{
 		if(Events&COREEVENT_GROUND_JUMP) GameServer()->CreateSound(m_Pos, SOUND_PLAYER_JUMP, Mask);
 		if(Events&COREEVENT_HOOK_ATTACH_GROUND) GameServer()->CreateSound(m_Pos, SOUND_HOOK_ATTACH_GROUND, Mask);
@@ -3105,6 +3119,10 @@ void CCharacter::Snap(int SnappingClient)
 	if(GetClass() == PLAYERCLASS_GHOST)
 	{
 		if(!pClient->IsZombie() && m_IsInvisible) return;
+	}
+	if(GetClass() == PLAYERCLASS_SPY)
+	{
+		if(pClient->IsZombie() && m_IsInvisible) return;
 	}
 	
 	if(m_Armor < 10 && SnappingClient != m_pPlayer->GetCID() && IsHuman() && GetClass() != PLAYERCLASS_HERO)
