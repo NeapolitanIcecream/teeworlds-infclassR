@@ -671,7 +671,7 @@ int CGameControllerMOD::OnCharacterDeath(class CCharacter *pVictim, class CPlaye
 
 			if (pKiller->GetClass() == PLAYERCLASS_SPY && pKiller->GetCharacter())
 			{
-				pKiller->GetCharacter()->GiveNinjaBuf();
+				pKiller->GetCharacter()->GiveSpyBuf();
 			}
 		}
 	}
