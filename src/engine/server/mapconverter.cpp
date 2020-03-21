@@ -651,9 +651,6 @@ void CMapConverter::Finalize()
 						case MENUCLASS_LOOPER:
 							ClassMask = MASK_DEFENDER;
 							break;
-						case MENUCLASS_SPY:
-							ClassMask = MASK_SUPPORT;
-							break;
 						case MENUCLASS_MEDIC:
 							ClassMask = MASK_MEDIC;
 							break;
