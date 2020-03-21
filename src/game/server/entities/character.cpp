@@ -1876,7 +1876,7 @@ void CCharacter::Tick()
 	// Spy
 	if(GetClass() == PLAYERCLASS_SPY)
 	{
-		if(Server()->Tick() > m_InvisibleTick + m_InfSpyHideTime*Server()->TickSpeed())
+		if(Server()->Tick() > m_InvisibleTick + g_Config.m_InfSpyHideTime*Server()->TickSpeed())
 		{
 			m_IsInvisible = false;
 		}
