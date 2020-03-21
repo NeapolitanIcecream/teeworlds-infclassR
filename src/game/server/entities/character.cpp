@@ -695,7 +695,7 @@ void CCharacter::FireWeapon()
 				}
 			}
 			else if(GetClass() == PLAYERCLASS_SPY) {
-				m_IsInvisible = true
+				m_IsInvisible = true;
 				m_InvisibleTick = Server()->Tick();
 			}
 			else if(GetClass() == PLAYERCLASS_LOOPER)
