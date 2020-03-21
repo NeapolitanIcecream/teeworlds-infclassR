@@ -1018,6 +1018,7 @@ bool CGameControllerMOD::IsChoosableClass(int PlayerClass)
 			case PLAYERCLASS_NINJA:
 			case PLAYERCLASS_MERCENARY:
 			case PLAYERCLASS_SNIPER:
+			case PLAYERCLASS_SPY:
 				nbSupport++;
 				break;
 			case PLAYERCLASS_MEDIC:
