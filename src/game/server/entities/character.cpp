@@ -694,6 +694,9 @@ void CCharacter::FireWeapon()
 					}
 				}
 			}
+			else if(GetClass() == PLAYERCLASS_SPY) {
+				// [Spy] todo
+			}
 			else if(GetClass() == PLAYERCLASS_LOOPER)
 			{
 				//Potential variable name conflicts with engineers wall (for example *pWall is used twice for both Looper and Engineer)
@@ -2174,6 +2177,13 @@ void CCharacter::Tick()
 							Broadcast = true;
 						}
 						break;
+					case CMapConverter::MENUCLASS_SPY:
+						if(GameServer()->m_pController->IsChoosableClass(PLAYERCLASS_SPY))
+						{
+							GameServer()->SendBroadcast_Localization(m_pPlayer->GetCID(), BROADCAST_PRIORITY_INTERFACE, BROADCAST_DURATION_REALTIME, _("Spy"), NULL);
+							Broadcast = true;
+						}
+						break;
 					case CMapConverter::MENUCLASS_MEDIC:
 						if(GameServer()->m_pController->IsChoosableClass(PLAYERCLASS_MEDIC))
 						{
@@ -2258,6 +2268,9 @@ void CCharacter::Tick()
 						break;
 					case CMapConverter::MENUCLASS_LOOPER:
 						NewClass = PLAYERCLASS_LOOPER;
+						break;
+					case CMapConverter::MENUCLASS_SPY:
+						NewClass = PLAYERCLASS_SPY;
 						break;
 				}
 				
@@ -2547,6 +2560,8 @@ void CCharacter::GiveGift(int GiftType)
 			break;
 		case PLAYERCLASS_LOOPER:
 			GiveWeapon(WEAPON_RIFLE, -1);
+			break;
+		case PLAYERCLASS_SPY:
 			break;
 		case PLAYERCLASS_MEDIC:
 			GiveWeapon(WEAPON_SHOTGUN, -1);
@@ -3550,6 +3565,22 @@ void CCharacter::ClassSpawnAttributes()
 			{
 				GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_DEFAULT, _("Type “/help {str:ClassName}” for more information about your class"), "ClassName", "looper", NULL);
 				m_pPlayer->m_knownClass[PLAYERCLASS_LOOPER] = true;
+			}
+			break;
+		case PLAYERCLASS_SPY:
+			RemoveAllGun();
+			m_pPlayer->m_InfectionTick = -1;
+			m_Health = 10;
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			GiveWeapon(WEAPON_HAMMER, -1);
+			GiveWeapon(WEAPON_GUN, -1);
+			m_ActiveWeapon = WEAPON_GUN;
+			
+			GameServer()->SendBroadcast_ClassIntro(m_pPlayer->GetCID(), PLAYERCLASS_SPY);
+			if(!m_pPlayer->IsKnownClass(PLAYERCLASS_SPY))
+			{
+				GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_DEFAULT, _("Type “/help {str:ClassName}” for more information about your class"), "ClassName", "spy", NULL);
+				m_pPlayer->m_knownClass[PLAYERCLASS_SPY] = true;
 			}
 			break;
 	

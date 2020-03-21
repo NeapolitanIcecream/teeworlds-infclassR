@@ -834,6 +834,7 @@ int CGameControllerMOD::ChooseHumanClass(const CPlayer *pPlayer) const
 			case PLAYERCLASS_NINJA:
 			case PLAYERCLASS_MERCENARY:
 			case PLAYERCLASS_SNIPER:
+			case PLAYERCLASS_SPY:
 				nbSupport++;
 				break;
 			case PLAYERCLASS_MEDIC:
@@ -877,6 +878,9 @@ int CGameControllerMOD::ChooseHumanClass(const CPlayer *pPlayer) const
 		1.0f : 0.0f;
 	Probability[PLAYERCLASS_NINJA - START_HUMANCLASS - 1] =
 		(nbSupport < g_Config.m_InfSupportLimit && g_Config.m_InfEnableNinja) ?
+		1.0f : 0.0f;
+	Probability[PLAYERCLASS_SPY - START_HUMANCLASS - 1] =
+		(nbSupport < g_Config.m_InfSupportLimit && g_Config.m_InfEnableSpy) ?
 		1.0f : 0.0f;
 
 	Probability[PLAYERCLASS_MEDIC - START_HUMANCLASS - 1] =

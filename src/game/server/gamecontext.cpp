@@ -257,7 +257,7 @@ int CGameContext::RandomZombieToWitch()
 
 void CGameContext::SetAvailabilities(std::vector<int> value) { // todo: should be order-independent, e.g with std map
 	if (value.empty())
-		value = std::vector<int>(10); //increased by 1 human class from 9 to 10
+		value = std::vector<int>(11); //increased by 1 human class from 10 to 11
 	g_Config.m_InfEnableBiologist = value[0];
 	g_Config.m_InfEnableEngineer = value[1];
 	g_Config.m_InfEnableHero = value[2];
@@ -268,6 +268,7 @@ void CGameContext::SetAvailabilities(std::vector<int> value) { // todo: should b
 	g_Config.m_InfEnableSniper = value[7];
 	g_Config.m_InfEnableSoldier = value[8];
 	g_Config.m_InfEnableLooper = value[9];
+	g_Config.m_InfEnableSpy = value[10];
 }
 
 void CGameContext::SetProbabilities(std::vector<int> value) { // todo: should be order-independent, e.g with std map
@@ -788,6 +789,9 @@ void CGameContext::SendBroadcast_ClassIntro(int ClientID, int Class)
 			break;
 		case PLAYERCLASS_LOOPER:
 			pClassName = Server()->Localization()->Localize(m_apPlayers[ClientID]->GetLanguage(), _("Looper"));
+			break;
+		case PLAYERCLASS_SPY:
+			pClassName = Server()->Localization()->Localize(m_apPlayers[ClientID]->GetLanguage(), _("Spy"));
 			break;
 		case PLAYERCLASS_SMOKER:
 			pClassName = Server()->Localization()->Localize(m_apPlayers[ClientID]->GetLanguage(), _("Smoker"));
@@ -2853,7 +2857,8 @@ bool CGameContext::ConStartFunRound(IConsole::IResult *pResult, void *pUserData)
 		g_Config.m_InfEnableScientist,
 		g_Config.m_InfEnableSniper,
 		g_Config.m_InfEnableSoldier,
-		g_Config.m_InfEnableLooper
+		g_Config.m_InfEnableLooper,
+		g_Config.m_InfEnableSpy
 	};
 
 	std::vector<const char*> phrases = {
@@ -2967,6 +2972,7 @@ bool CGameContext::ConSetClass(IConsole::IResult *pResult, void *pUserData)
 	else if(str_comp(pClassName, "scientist") == 0) pPlayer->SetClass(PLAYERCLASS_SCIENTIST);
 	else if(str_comp(pClassName, "biologist") == 0) pPlayer->SetClass(PLAYERCLASS_BIOLOGIST);
 	else if(str_comp(pClassName, "looper") == 0) pPlayer->SetClass(PLAYERCLASS_LOOPER);
+	else if(str_comp(pClassName, "spy") == 0) pPlayer->SetClass(PLAYERCLASS_SPY);
 	else if(str_comp(pClassName, "medic") == 0) pPlayer->SetClass(PLAYERCLASS_MEDIC);
 	else if(str_comp(pClassName, "hero") == 0) pPlayer->SetClass(PLAYERCLASS_HERO);
 	else if(str_comp(pClassName, "ninja") == 0) pPlayer->SetClass(PLAYERCLASS_NINJA);
@@ -3144,6 +3150,11 @@ bool CGameContext::PrivateMessage(const char* pStr, int ClientID, bool TeamChat)
 			{
 				CheckClass = PLAYERCLASS_LOOPER;
 				str_copy(aChatTitle, "looper", sizeof(aChatTitle));
+			}
+			else if(str_comp(aNameFound, "!spy") == 0 && m_apPlayers[ClientID] && m_apPlayers[ClientID]->GetCharacter())
+			{
+				CheckClass = PLAYERCLASS_SPY;
+				str_copy(aChatTitle, "spy", sizeof(aChatTitle));
 			}
 			else if(str_comp(aNameFound, "!medic") == 0 && m_apPlayers[ClientID] && m_apPlayers[ClientID]->GetCharacter())
 			{
@@ -3434,6 +3445,8 @@ bool CGameContext::ConTop10(IConsole::IResult *pResult, void *pUserData)
 			pSelf->Server()->ShowTop10(ClientID, SQL_SCORETYPE_BIOLOGIST_SCORE);
 		else if(str_comp_nocase(pArg, "looper") == 0)
 			pSelf->Server()->ShowTop10(ClientID, SQL_SCORETYPE_LOOPER_SCORE);
+		else if(str_comp_nocase(pArg, "spy") == 0)
+			pSelf->Server()->ShowTop10(ClientID, SQL_SCORETYPE_SPY_SCORE);
 		else if(str_comp_nocase(pArg, "medic") == 0)
 			pSelf->Server()->ShowTop10(ClientID, SQL_SCORETYPE_MEDIC_SCORE);
 		else if(str_comp_nocase(pArg, "hero") == 0)
@@ -3488,6 +3501,8 @@ bool CGameContext::ConRank(IConsole::IResult *pResult, void *pUserData)
 			pSelf->Server()->ShowRank(ClientID, SQL_SCORETYPE_BIOLOGIST_SCORE);
 		else if(str_comp_nocase(pArg, "looper") == 0)
 			pSelf->Server()->ShowRank(ClientID, SQL_SCORETYPE_LOOPER_SCORE);
+		else if(str_comp_nocase(pArg, "spy") == 0)
+			pSelf->Server()->ShowRank(ClientID, SQL_SCORETYPE_SPY_SCORE);
 		else if(str_comp_nocase(pArg, "medic") == 0)
 			pSelf->Server()->ShowRank(ClientID, SQL_SCORETYPE_MEDIC_SCORE);
 		else if(str_comp_nocase(pArg, "hero") == 0)
@@ -3543,6 +3558,8 @@ bool CGameContext::ConGoal(IConsole::IResult *pResult, void *pUserData)
 			pSelf->Server()->ShowGoal(ClientID, SQL_SCORETYPE_BIOLOGIST_SCORE);
 		else if(str_comp_nocase(pArg, "looper") == 0)
 			pSelf->Server()->ShowGoal(ClientID, SQL_SCORETYPE_LOOPER_SCORE);
+		else if(str_comp_nocase(pArg, "spy") == 0)
+			pSelf->Server()->ShowGoal(ClientID, SQL_SCORETYPE_SPY_SCORE);
 		else if(str_comp_nocase(pArg, "medic") == 0)
 			pSelf->Server()->ShowGoal(ClientID, SQL_SCORETYPE_MEDIC_SCORE);
 		else if(str_comp_nocase(pArg, "hero") == 0)
@@ -3708,6 +3725,15 @@ bool CGameContext::ConHelp(IConsole::IResult *pResult, void *pUserData)
 			pSelf->Server()->Localization()->Format_L(Buffer, pLanguage, _("Looper"), NULL); 
 			Buffer.append(" ~~\n\n");
 			pSelf->Server()->Localization()->Format_L(Buffer, pLanguage, _("The Looper has a laser wall that slows down zombies and a fast shooting low-range-laser-rifle."), NULL);
+			
+			pSelf->SendMOTD(ClientID, Buffer.buffer());
+		}
+		else if(str_comp_nocase(pHelpPage, "spy") == 0)
+		{
+			Buffer.append("~~ ");
+			pSelf->Server()->Localization()->Format_L(Buffer, pLanguage, _("Spy"), NULL); 
+			Buffer.append(" ~~\n\n");
+			pSelf->Server()->Localization()->Format_L(Buffer, pLanguage, _("The Spy can hide from zombies using its hammer and earn damege bonus from kill."), NULL);
 			
 			pSelf->SendMOTD(ClientID, Buffer.buffer());
 		}

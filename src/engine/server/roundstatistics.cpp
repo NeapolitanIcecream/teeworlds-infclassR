@@ -68,6 +68,9 @@ int CRoundStatistics::CPlayer::OnScoreEvent(int EventType, int Class)
 		case PLAYERCLASS_LOOPER:
 			m_LooperScore += Points;
 			break;
+		case PLAYERCLASS_SPY:
+			m_SpyScore += Points;
+			break;
 		case PLAYERCLASS_MEDIC:
 			m_MedicScore += Points;
 			break;

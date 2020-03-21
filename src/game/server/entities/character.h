@@ -69,6 +69,7 @@ public:
 
 	void HandleWeapons();
 	void HandleNinja();
+	void HandleSpy();
 	void HandleWaterJump();
 
 	void OnPredictedInput(CNetObj_PlayerInput *pNewInput);
@@ -97,6 +98,7 @@ public:
 	class CPlayer *GetPlayer() { return m_pPlayer; }
 	
 	void GiveNinjaBuf();
+	void GiveSpyBuf();
 
 private:
 	// player controlling this character
@@ -231,6 +233,7 @@ public:
 	bool m_VoodooAboutToDie;
 	int m_TurretCount;
 	int m_ResetKillsTime;
+	int m_SpyDamageBuff;
 	
 
 public:

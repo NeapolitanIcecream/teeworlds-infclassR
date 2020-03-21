@@ -307,6 +307,9 @@ void CPlayer::Snap(int SnappingClient)
 				case PLAYERCLASS_NINJA:
 					str_format(aClanName, sizeof(aClanName), "%sNinja", Server()->IsClientLogged(GetCID()) ? "@" : " ");
 					break;
+				case PLAYERCLASS_SPY:
+					str_format(aClanName, sizeof(aClanName), "%sSpy", Server()->IsClientLogged(GetCID()) ? "@" : " ");
+					break;
 				case PLAYERCLASS_SMOKER:
 					str_format(aClanName, sizeof(aClanName), "%sSmoker", Server()->IsClientLogged(GetCID()) ? "@" : " ");
 					break;
@@ -651,6 +654,13 @@ void CPlayer::SetClassSkin(int newClass, int State)
 			str_copy(m_TeeInfos.m_SkinName, "default", sizeof(m_TeeInfos.m_SkinName));
 			m_TeeInfos.m_ColorBody = 255;
 			m_TeeInfos.m_ColorFeet = 0;
+			break;
+		// [Spy] Temporarily use the skin of hunter
+		case PLAYERCLASS_SPY:
+			m_TeeInfos.m_UseCustomColor = 1;
+			str_copy(m_TeeInfos.m_SkinName, "warpaint", sizeof(m_TeeInfos.m_SkinName));
+			m_TeeInfos.m_ColorBody = 3866368;
+			m_TeeInfos.m_ColorFeet = 65414;
 			break;
 		case PLAYERCLASS_SMOKER:
 			m_TeeInfos.m_UseCustomColor = 1;
