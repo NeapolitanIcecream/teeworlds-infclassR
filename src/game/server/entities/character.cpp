@@ -694,7 +694,7 @@ void CCharacter::FireWeapon()
 					}
 				}
 			}
-			else if(GetClass() == PLAYERCLASS_SPY) {
+			else if(GetClass() == PLAYERCLASS_SPY && m_InvisibleTick > g_Config.m_InfSpyHideRecover * Server()->TickSpeed() + Server()->Tick()) {
 				m_IsInvisible = true;
 				m_InvisibleTick = Server()->Tick();
 			}
