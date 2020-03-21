@@ -117,6 +117,7 @@ m_pConsole(pConsole)
 	m_BroadcastWhiteHoleReady = -100;
 	m_pHeroFlag = nullptr;
 	m_ResetKillsTime = 0;
+	m_SpyLastHideTick = 0;
 /* INFECTION MODIFICATION END *****************************************/
 }
 
@@ -694,9 +695,10 @@ void CCharacter::FireWeapon()
 					}
 				}
 			}
-			else if(GetClass() == PLAYERCLASS_SPY && m_InvisibleTick > g_Config.m_InfSpyHideRecover * Server()->TickSpeed() + Server()->Tick()) {
+			else if(GetClass() == PLAYERCLASS_SPY && Server()->Tick() > g_Config.m_InfSpyHideRecover * Server()->TickSpeed() + m_SpyLastHideTick) {
 				m_IsInvisible = true;
 				m_InvisibleTick = Server()->Tick();
+				m_SpyLastHideTick = m_InvisibleTick;
 			}
 			else if(GetClass() == PLAYERCLASS_LOOPER)
 			{

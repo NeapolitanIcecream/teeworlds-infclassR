@@ -234,6 +234,7 @@ public:
 	int m_TurretCount;
 	int m_ResetKillsTime;
 	int m_SpyDamageBuff;
+	int m_SpyLastHideTick;
 	
 
 public:
