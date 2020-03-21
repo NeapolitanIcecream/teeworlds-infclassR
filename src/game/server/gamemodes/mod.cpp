@@ -993,7 +993,7 @@ bool CGameControllerMOD::IsEnabledClass(int PlayerClass) {
 			return g_Config.m_InfEnableSniper;
 		case PLAYERCLASS_LOOPER:
 			return g_Config.m_InfEnableLooper;
-		case PLAYERCLASS_LOOPER:
+		case PLAYERCLASS_SPY:
 			return g_Config.m_InfEnableSpy;
 		default:
 			return false;
