@@ -670,8 +670,8 @@ int CServer::Init()
 	SetMaxAmmo(INFWEAPON_BIOLOGIST_SHOTGUN, 10);
 	SetMaxAmmo(INFWEAPON_LOOPER_RIFLE, 10);
 	SetMaxAmmo(INFWEAPON_LOOPER_GRENADE, 10);
-	SetMaxAmmo(INFWEAPON_ARCHITECT_RIFLE, g_Config.m_InfArchitectRifleAmmo);
-	SetMaxAmmo(INFWEAPON_ARCHITECT_GRENADE, g_Config.m_InfArchitectGrenadeAmmo);
+	SetMaxAmmo(INFWEAPON_ARCHITECT_RIFLE, 40);
+	SetMaxAmmo(INFWEAPON_ARCHITECT_GRENADE, 1);
 	
 	SetClassAvailability(PLAYERCLASS_ENGINEER, 2);
 	SetClassAvailability(PLAYERCLASS_SOLDIER, 2);

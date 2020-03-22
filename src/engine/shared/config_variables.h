@@ -107,8 +107,8 @@ MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 4, 0, 10000, CFGFLAG_SERVE
 // [Architect]
 MACRO_CONFIG_INT(InfArchitectRifleDamage, inf_architect_rifle_damage, 2, 0, 10000, CFGFLAG_SERVER, "Architect rifle damage")
 MACRO_CONFIG_INT(InfArchitectRifleForce, inf_architect_rifle_force, 10, 0, 10000, CFGFLAG_SERVER, "Architect rifle force")
-MACRO_CONFIG_INT(InfArchitectRifleAmmo, inf_architect_rifle_ammo, 40, 0, 10000, CFGFLAG_SERVER, "Architect rifle ammo")
-MACRO_CONFIG_INT(InfArchitectGrenadeAmmo, inf_architect_grenade_ammo, 1, 0, 10000, CFGFLAG_SERVER, "Architect grenade ammo")
+MACRO_CONFIG_INT(InfArchitectRifleAmmo, inf_architect_rifle_ammo, 40, 0, 10000, CFGFLAG_SERVER, "Architect rifle ammo") // Deprecated
+MACRO_CONFIG_INT(InfArchitectGrenadeAmmo, inf_architect_grenade_ammo, 1, 0, 10000, CFGFLAG_SERVER, "Architect grenade ammo") // Deprecated
 MACRO_CONFIG_INT(InfArchitectGrenadeDamage, inf_architect_grenade_damage, 10, 0, 10000, CFGFLAG_SERVER, "Architect grenade damage")
 MACRO_CONFIG_INT(InfArchitectGrenadeRange, inf_architect_grenade_range, 5, 0, 10000, CFGFLAG_SERVER, "Architect grenade range")
 MACRO_CONFIG_INT(InfArchitectGrenadeRecovery, inf_architect_grenade_recovery, 5, 0, 10000, CFGFLAG_SERVER, "For how long Architect's grenade recover ammo (in seconds)")
