@@ -1371,7 +1371,7 @@ void CCharacter::FireWeapon()
 		{
 			if (GetClass() == PLAYERCLASS_ARCHITECT)
 			{
-				CProjectile *pProj = new CProjectile(GameWorld(), WEAPON_RIFLE,
+				CProjectile *pProj = new CProjectile(GameWorld(), WEAPON_GUN,
 					m_pPlayer->GetCID(),
 					ProjStartPos,
 					Direction,
