@@ -1195,7 +1195,28 @@ void CCharacter::FireWeapon()
 
 		case WEAPON_GRENADE:
 		{
-			if(GetClass() == PLAYERCLASS_MERCENARY)
+			if (GetClass() == PLAYERCLASS_ARCHITECT)
+			{
+				CProjectile *pProj = new CProjectile(GameWorld(), WEAPON_GRENADE,
+													 m_pPlayer->GetCID(),
+													 ProjStartPos,
+													 Direction,
+													 (int)(Server()->TickSpeed() * GameServer()->Tuning()->m_GrenadeLifetime),
+													 1, true, 0, SOUND_GRENADE_EXPLODE, INFWEAPON_ARCHITECT_GRENADE); // Hack!
+
+				// pack the Projectile and send it to the client Directly
+				CNetObj_Projectile p;
+				pProj->FillInfo(&p);
+
+				CMsgPacker Msg(NETMSGTYPE_SV_EXTRAPROJECTILE);
+				Msg.AddInt(1);
+				for (unsigned i = 0; i < sizeof(CNetObj_Projectile) / sizeof(int); i++)
+					Msg.AddInt(((int *)&p)[i]);
+				Server()->SendMsg(&Msg, MSGFLAG_VITAL, m_pPlayer->GetCID());
+
+				GameServer()->CreateSound(m_Pos, SOUND_GRENADE_FIRE);
+			}
+			else if(GetClass() == PLAYERCLASS_MERCENARY)
 			{				
 				//Find bomb
 				bool BombFound = false;

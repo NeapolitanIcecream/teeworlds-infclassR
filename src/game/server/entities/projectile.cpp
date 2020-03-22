@@ -129,7 +129,16 @@ void CProjectile::Tick()
 		}
 		else if(m_Explosive)
 		{
-			GameServer()->CreateExplosion(CurPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
+			int OwnerClass = OwnerChar.GetClass();
+			if (OwnerClass == PLAYERCLASS_ARCHITECT)
+			{
+				GameServer()->CreateExplosionDisk(m_Pos, float(g_Config.m_InfArchitectGrenadeRange), float(g_Config.m_InfArchitectGrenadeRange) * 1.5f, g_Config.m_InfArchitectGrenadeDamage, float(g_Config.m_InfArchitectGrenadeForce), m_Owner, m_Weapon, m_TakeDamageMode);
+			}
+			else
+			{
+				GameServer()->CreateExplosion(CurPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
+			}
+			
 		}
 		else if(TargetChr)
 		{
