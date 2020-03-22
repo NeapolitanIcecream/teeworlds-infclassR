@@ -105,9 +105,11 @@ MACRO_CONFIG_INT(InfSpyInitialDamage, inf_spy_initial_damage, 2, 0, 10000, CFGFL
 MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 4, 0, 10000, CFGFLAG_SERVER, "Spy max damage")
 
 // [Architect]
-MACRO_CONFIG_INT(InfArchitectRifleForce, inf_architect_rifle_force, 1, 0, 10000, CFGFLAG_SERVER, "Architect rifle force")
-MACRO_CONFIG_INT(InfArchitectLauncherRange, inf_architect_launcher_range, 5, 0, 10000, CFGFLAG_SERVER, "Architect launcher range")
-MACRO_CONFIG_INT(InfArchitectLauncherRecovery, inf_architect_launcher_recovery, 5, 0, 10000, CFGFLAG_SERVER, "For how long Architect's launcher recover ammo (in seconds)")
+MACRO_CONFIG_INT(InfArchitectRifleDamage, inf_architect_rifle_damage, 2, 0, 10000, CFGFLAG_SERVER, "Architect rifle damage")
+MACRO_CONFIG_INT(InfArchitectRifleForce, inf_architect_rifle_force, 10, 0, 10000, CFGFLAG_SERVER, "Architect rifle force")
+MACRO_CONFIG_INT(InfArchitectGrenadeDamage, inf_architect_grenade_damage, 10, 0, 10000, CFGFLAG_SERVER, "Architect grenade damage")
+MACRO_CONFIG_INT(InfArchitectGrenadeRange, inf_architect_grenade_range, 5, 0, 10000, CFGFLAG_SERVER, "Architect grenade range")
+MACRO_CONFIG_INT(InfArchitectGrenadeRecovery, inf_architect_grenade_recovery, 5, 0, 10000, CFGFLAG_SERVER, "For how long Architect's grenade recover ammo (in seconds)")
 
 MACRO_CONFIG_INT(InfSpiderHookTime, inf_spider_hook_time, 3, 1, 10000, CFGFLAG_SERVER, "For how long spiders will be able to hook humans (in seconds)")
 MACRO_CONFIG_INT(InfSmokerHookDamage, inf_smoker_hook_damage, 3, 1, 10000, CFGFLAG_SERVER, "Damage taken by smoker (hook)")
