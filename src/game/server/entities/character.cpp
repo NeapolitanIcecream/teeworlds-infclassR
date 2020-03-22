@@ -1376,7 +1376,7 @@ void CCharacter::FireWeapon()
 					ProjStartPos,
 					Direction,
 					(int)(Server()->TickSpeed()*GameServer()->Tuning()->m_GunLifetime),
-					g_Config.m_InfArchitectRifleDamage, 0, float(g_Config.m_InfArchitectRifleForce), -1, WEAPON_GUN);
+					g_Config.m_InfArchitectRifleDamage, 0, float(g_Config.m_InfArchitectRifleForce), -1, WEAPON_RIFLE);
 
 				// pack the Projectile and send it to the client Directly
 				CNetObj_Projectile p;
@@ -4191,6 +4191,8 @@ int CCharacter::GetInfWeaponID(int WID)
 				return INFWEAPON_HERO_GRENADE;
 			case PLAYERCLASS_LOOPER:
 				return INFWEAPON_LOOPER_GRENADE;
+			case PLAYERCLASS_ARCHITECT:
+				return INFWEAPON_ARCHITECT_GRENADE;
 			default:
 				return INFWEAPON_GRENADE;
 		}
@@ -4213,6 +4215,8 @@ int CCharacter::GetInfWeaponID(int WID)
 				return INFWEAPON_BIOLOGIST_RIFLE;
 			case PLAYERCLASS_MEDIC:
 				return INFWEAPON_MEDIC_RIFLE;
+			case PLAYERCLASS_ARCHITECT:
+				return INFWEAPON_ARCHITECT_RIFLE;
 			default:
 				return INFWEAPON_RIFLE;
 		}
