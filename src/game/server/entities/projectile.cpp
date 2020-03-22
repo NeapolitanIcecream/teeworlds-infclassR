@@ -132,7 +132,7 @@ void CProjectile::Tick()
 			int OwnerClass = OwnerChar->GetClass();
 			if (OwnerClass == PLAYERCLASS_ARCHITECT)
 			{
-				GameServer()->CreateExplosionDisk(m_Pos, float(g_Config.m_InfArchitectGrenadeRange), float(g_Config.m_InfArchitectGrenadeRange) * 1.5f, g_Config.m_InfArchitectGrenadeDamage, float(g_Config.m_InfArchitectGrenadeForce), m_Owner, m_Weapon, m_TakeDamageMode);
+				GameServer()->CreateExplosionDisk(CurPos, float(g_Config.m_InfArchitectGrenadeRange), float(g_Config.m_InfArchitectGrenadeRange) * 1.5f, g_Config.m_InfArchitectGrenadeDamage, float(g_Config.m_InfArchitectGrenadeForce), m_Owner, m_Weapon, m_TakeDamageMode);
 			}
 			else
 			{
