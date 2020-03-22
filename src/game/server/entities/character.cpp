@@ -1376,7 +1376,7 @@ void CCharacter::FireWeapon()
 					ProjStartPos,
 					Direction,
 					(int)(Server()->TickSpeed()*GameServer()->Tuning()->m_GunLifetime),
-					g_Config.m_InfArchitectRifleDamage, true, float(g_Config.m_InfArchitectRifleForce), -1, WEAPON_RIFLE);
+					g_Config.m_InfArchitectRifleDamage, 0, float(g_Config.m_InfArchitectRifleForce), -1, WEAPON_GUN);
 
 				// pack the Projectile and send it to the client Directly
 				CNetObj_Projectile p;
