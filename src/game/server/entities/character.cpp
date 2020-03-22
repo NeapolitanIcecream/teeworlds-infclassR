@@ -1072,7 +1072,7 @@ void CCharacter::FireWeapon()
 					ProjStartPos,
 					Direction,
 					(int)(Server()->TickSpeed()*GameServer()->Tuning()->m_GunLifetime),
-					m_InfSpyInitialDamage + m_SpyDamageBuff * m_InfSpyKillBonus / m_InfSpyKillDemand, 0, 0, -1, WEAPON_GUN);
+					g_Config.m_InfSpyInitialDamage + m_SpyDamageBuff * g_Config.m_InfSpyKillBonus / g_Config.m_InfSpyKillDemand, 0, 0, -1, WEAPON_GUN);
 
 				// pack the Projectile and send it to the client Directly
 				CNetObj_Projectile p;
