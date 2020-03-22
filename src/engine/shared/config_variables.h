@@ -100,6 +100,9 @@ MACRO_CONFIG_INT(InfBatHookTime, inf_bat_hook_time, 5, 1, 10000, CFGFLAG_SERVER,
 MACRO_CONFIG_INT(InfSpyHideTime, inf_spy_hide_time, 3, 0, 10000, CFGFLAG_SERVER, "For how long spy could hide from zombies (in seconds)")
 MACRO_CONFIG_INT(InfSpyHideRecover, inf_spy_hide_recover, 10, 0, 10000, CFGFLAG_SERVER, "For how long spy'hiding will recover from cool down (in seconds)")
 MACRO_CONFIG_INT(InfSpyKillBonus, inf_spy_kill_bonus, 1, 0, 10000, CFGFLAG_SERVER, "Damage improvement from kill bonus")
+MACRO_CONFIG_INT(InfSpyKillDemand, inf_spy_kill_demand, 3, 0, 10000, CFGFLAG_SERVER, "For how many kills spy can get bonus")
+MACRO_CONFIG_INT(InfSpyInitialDamage, inf_spy_initial_damage, 2, 0, 10000, CFGFLAG_SERVER, "Spy initial damage")
+MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 4, 0, 10000, CFGFLAG_SERVER, "Spy max damage")
 
 MACRO_CONFIG_INT(InfSpiderHookTime, inf_spider_hook_time, 3, 1, 10000, CFGFLAG_SERVER, "For how long spiders will be able to hook humans (in seconds)")
 MACRO_CONFIG_INT(InfSmokerHookDamage, inf_smoker_hook_damage, 3, 1, 10000, CFGFLAG_SERVER, "Damage taken by smoker (hook)")

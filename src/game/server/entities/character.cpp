@@ -1072,7 +1072,7 @@ void CCharacter::FireWeapon()
 					ProjStartPos,
 					Direction,
 					(int)(Server()->TickSpeed()*GameServer()->Tuning()->m_GunLifetime),
-					1 + m_SpyDamageBuff, 0, 0, -1, WEAPON_GUN);
+					m_InfSpyInitialDamage + m_SpyDamageBuff * m_InfSpyKillBonus / m_InfSpyKillDemand, 0, 0, -1, WEAPON_GUN);
 
 				// pack the Projectile and send it to the client Directly
 				CNetObj_Projectile p;
@@ -3474,7 +3474,7 @@ void CCharacter::GiveSpyBuf()
 		return;
 
 	m_SpyDamageBuff++;
-	GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_SCORE, _("Spy damage increased"), NULL);
+	GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_SCORE, _("Kill bonus earned"), NULL);
 }
 
 void CCharacter::GiveNinjaBuf()
