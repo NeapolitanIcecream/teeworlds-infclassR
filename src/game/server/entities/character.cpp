@@ -1907,7 +1907,7 @@ void CCharacter::Tick()
 		else
 		{
 			m_IsInvisible = true;
-			int Seconds = g_Config.m_InfSpyHideTime - (Server()->Tick() - m_InvisibleTick);
+			int Seconds = 1 + (g_Config.m_InfSpyHideTime * Server()->TickSpeed() - (Server()->Tick() - m_InvisibleTick)) / Server()->TickSpeed();
 			GameServer()->SendBroadcast_Localization(GetPlayer()->GetCID(), BROADCAST_PRIORITY_WEAPONSTATE, BROADCAST_DURATION_REALTIME,
 				_("Hide: {sec:RemainingTime}"),
 				"RemainingTime", &Seconds,
