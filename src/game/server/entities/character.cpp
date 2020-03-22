@@ -2228,6 +2228,13 @@ void CCharacter::Tick()
 							Broadcast = true;
 						}
 						break;
+					case CMapConverter::MENUCLASS_ARCHITECT:
+						if(GameServer()->m_pController->IsChoosableClass(PLAYERCLASS_ARCHITECT))
+						{
+							GameServer()->SendBroadcast_Localization(m_pPlayer->GetCID(), BROADCAST_PRIORITY_INTERFACE, BROADCAST_DURATION_REALTIME, _("Architect"), NULL);
+							Broadcast = true;
+						}
+						break;
 					case CMapConverter::MENUCLASS_MEDIC:
 						if(GameServer()->m_pController->IsChoosableClass(PLAYERCLASS_MEDIC))
 						{
@@ -2315,6 +2322,9 @@ void CCharacter::Tick()
 						break;
 					case CMapConverter::MENUCLASS_SPY:
 						NewClass = PLAYERCLASS_SPY;
+						break;
+					case CMapConverter::MENUCLASS_ARCHITECT:
+						NewClass = PLAYERCLASS_ARCHITECT;
 						break;
 				}
 				
@@ -2606,6 +2616,10 @@ void CCharacter::GiveGift(int GiftType)
 			GiveWeapon(WEAPON_RIFLE, -1);
 			break;
 		case PLAYERCLASS_SPY:
+			break;
+		case PLAYERCLASS_ARCHITECT:
+			GiveWeapon(WEAPON_RIFLE, -1);
+			GiveWeapon(WEAPON_GRENADE, -1);
 			break;
 		case PLAYERCLASS_MEDIC:
 			GiveWeapon(WEAPON_SHOTGUN, -1);
@@ -3640,7 +3654,23 @@ void CCharacter::ClassSpawnAttributes()
 				m_pPlayer->m_knownClass[PLAYERCLASS_SPY] = true;
 			}
 			break;
-	
+		case PLAYERCLASS_ARCHITECT:
+			RemoveAllGun();
+			m_pPlayer->m_InfectionTick = -1;
+			m_Health = 10;
+			m_aWeapons[WEAPON_HAMMER].m_Got = true;
+			GiveWeapon(WEAPON_HAMMER, -1);
+			GiveWeapon(WEAPON_RIFLE, -1);
+			GiveWeapon(WEAPON_GRENADE, -1);
+			m_ActiveWeapon = WEAPON_RIFLE;
+			
+			GameServer()->SendBroadcast_ClassIntro(m_pPlayer->GetCID(), PLAYERCLASS_ARCHITECT);
+			if(!m_pPlayer->IsKnownClass(PLAYERCLASS_ARCHITECT))
+			{
+				GameServer()->SendChatTarget_Localization(m_pPlayer->GetCID(), CHATCATEGORY_DEFAULT, _("Type “/help {str:ClassName}” for more information about your class"), "ClassName", "architect", NULL);
+				m_pPlayer->m_knownClass[PLAYERCLASS_ARCHITECT] = true;
+			}
+			break;
 		case PLAYERCLASS_MEDIC:
 			RemoveAllGun();
 			m_pPlayer->m_InfectionTick = -1;

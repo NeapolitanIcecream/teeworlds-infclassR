@@ -529,6 +529,7 @@ void CGameControllerMOD::Snap(int SnappingClient)
 				case PLAYERCLASS_MERCENARY:
 				case PLAYERCLASS_SNIPER:
 				case PLAYERCLASS_SPY:
+				case PLAYERCLASS_ARCHITECT:
 					Support++;
 					break;
 				case PLAYERCLASS_ENGINEER:
@@ -841,6 +842,7 @@ int CGameControllerMOD::ChooseHumanClass(const CPlayer *pPlayer) const
 			case PLAYERCLASS_MERCENARY:
 			case PLAYERCLASS_SNIPER:
 			case PLAYERCLASS_SPY:
+			case PLAYERCLASS_ARCHITECT:
 				nbSupport++;
 				break;
 			case PLAYERCLASS_MEDIC:
@@ -887,6 +889,9 @@ int CGameControllerMOD::ChooseHumanClass(const CPlayer *pPlayer) const
 		1.0f : 0.0f;
 	Probability[PLAYERCLASS_SPY - START_HUMANCLASS - 1] =
 		(nbSupport < g_Config.m_InfSupportLimit && g_Config.m_InfEnableSpy) ?
+		1.0f : 0.0f;
+	Probability[PLAYERCLASS_ARCHITECT - START_HUMANCLASS - 1] =
+		(nbSupport < g_Config.m_InfSupportLimit && g_Config.m_InfEnableArchitect) ?
 		1.0f : 0.0f;
 
 	Probability[PLAYERCLASS_MEDIC - START_HUMANCLASS - 1] =
@@ -1001,6 +1006,8 @@ bool CGameControllerMOD::IsEnabledClass(int PlayerClass) {
 			return g_Config.m_InfEnableLooper;
 		case PLAYERCLASS_SPY:
 			return g_Config.m_InfEnableSpy;
+		case PLAYERCLASS_ARCHITECT:
+			return g_Config.m_InfEnableArchitect;
 		default:
 			return false;
 	}
@@ -1025,6 +1032,7 @@ bool CGameControllerMOD::IsChoosableClass(int PlayerClass)
 			case PLAYERCLASS_MERCENARY:
 			case PLAYERCLASS_SNIPER:
 			case PLAYERCLASS_SPY:
+			case PLAYERCLASS_ARCHITECT:
 				nbSupport++;
 				break;
 			case PLAYERCLASS_MEDIC:
@@ -1051,7 +1059,6 @@ bool CGameControllerMOD::IsChoosableClass(int PlayerClass)
 		case PLAYERCLASS_SOLDIER:
 		case PLAYERCLASS_SCIENTIST:
 		case PLAYERCLASS_BIOLOGIST:
-		case PLAYERCLASS_SPY:
 			return (nbDefender < g_Config.m_InfDefenderLimit);
 		case PLAYERCLASS_MEDIC:
 			return (nbMedic < g_Config.m_InfMedicLimit);
@@ -1060,6 +1067,8 @@ bool CGameControllerMOD::IsChoosableClass(int PlayerClass)
 		case PLAYERCLASS_NINJA:
 		case PLAYERCLASS_MERCENARY:
 		case PLAYERCLASS_SNIPER:
+		case PLAYERCLASS_SPY:
+		case PLAYERCLASS_ARCHITECT:
 			return (nbSupport < g_Config.m_InfSupportLimit);
 		case PLAYERCLASS_LOOPER:
 			return (nbDefender < g_Config.m_InfDefenderLimit);

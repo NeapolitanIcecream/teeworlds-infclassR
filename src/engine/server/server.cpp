@@ -104,6 +104,8 @@ static inline int ChallengeTypeToScoreType(int ChallengeType)
 			return SQL_SCORETYPE_LOOPER_SCORE;
 		case 10:
 			return SQL_SCORETYPE_SPY_SCORE;
+		case 11:
+			return SQL_SCORETYPE_ARCHITECT_SCORE;
 	}
 	
 	return SQL_SCORETYPE_ROUND_SCORE;
@@ -676,6 +678,7 @@ int CServer::Init()
 	SetClassAvailability(PLAYERCLASS_BIOLOGIST, 2);
 	SetClassAvailability(PLAYERCLASS_LOOPER, 2);
 	SetClassAvailability(PLAYERCLASS_SPY, 2);
+	SetClassAvailability(PLAYERCLASS_ARCHITECT, 2);
 	
 	SetClassAvailability(PLAYERCLASS_SMOKER, 1);
 	SetClassAvailability(PLAYERCLASS_HUNTER, 1);
@@ -1629,6 +1632,9 @@ void CServer::SendServerInfo(const NETADDR *pAddr, int Token, bool Extended, boo
 					break;
 				case SQL_SCORETYPE_SPY_SCORE:
 					str_format(aBuf, sizeof(aBuf), "%s | %s: %s", g_Config.m_SvName, "SpyOfTheDay", m_aChallengeWinner);
+					break;
+				case SQL_SCORETYPE_ARCHITECT_SCORE:
+					str_format(aBuf, sizeof(aBuf), "%s | %s: %s", g_Config.m_SvName, "ArchitectOfTheDay", m_aChallengeWinner);
 					break;
 				case SQL_SCORETYPE_NINJA_SCORE:
 					str_format(aBuf, sizeof(aBuf), "%s | %s: %s", g_Config.m_SvName, "NinjaOfTheDay", m_aChallengeWinner);
@@ -3530,6 +3536,10 @@ public:
 					str_copy(pMOTD, "== Best Spy ==\n32 best scores on this map\n\n", sizeof(aBuf)-(pMOTD-aBuf));
 					pMOTD += str_length(pMOTD);
 					break;
+				case SQL_SCORETYPE_ARCHITECT_SCORE:
+					str_copy(pMOTD, "== Best Architect ==\n32 best scores on this map\n\n", sizeof(aBuf)-(pMOTD-aBuf));
+					pMOTD += str_length(pMOTD);
+					break;
 				case SQL_SCORETYPE_MEDIC_SCORE:
 					str_copy(pMOTD, "== Best Medic ==\n32 best scores on this map\n\n", sizeof(aBuf)-(pMOTD-aBuf));
 					pMOTD += str_length(pMOTD);
@@ -3690,6 +3700,9 @@ public:
 						break;
 					case SQL_SCORETYPE_SPY_SCORE:
 						str_copy(pMOTD, "== Spy of the day ==\nBest score in one round\n\n", sizeof(aMotdBuf)-(pMOTD-aMotdBuf));
+						break;
+					case SQL_SCORETYPE_ARCHITECT_SCORE:
+						str_copy(pMOTD, "== Architect of the day ==\nBest score in one round\n\n", sizeof(aMotdBuf)-(pMOTD-aMotdBuf));
 						break;
 					case SQL_SCORETYPE_MEDIC_SCORE:
 						str_copy(pMOTD, "== Medic of the day ==\nBest score in one round\n\n", sizeof(aMotdBuf)-(pMOTD-aMotdBuf));
@@ -4311,6 +4324,8 @@ public:
 				UpdateScore(pSqlServer, SQL_SCORETYPE_LOOPER_SCORE, m_PlayerStatistics.m_LooperScore, "Looper");
 			if(m_PlayerStatistics.m_SpyScore > 0)
 				UpdateScore(pSqlServer, SQL_SCORETYPE_SPY_SCORE, m_PlayerStatistics.m_SpyScore, "Spy");
+			if(m_PlayerStatistics.m_ArchitectScore > 0)
+				UpdateScore(pSqlServer, SQL_SCORETYPE_ARCHITECT_SCORE, m_PlayerStatistics.m_ArchitectScore, "Architect");
 			if(m_PlayerStatistics.m_MedicScore > 0)
 				UpdateScore(pSqlServer, SQL_SCORETYPE_MEDIC_SCORE, m_PlayerStatistics.m_MedicScore, "Medic");
 			if(m_PlayerStatistics.m_HeroScore > 0)

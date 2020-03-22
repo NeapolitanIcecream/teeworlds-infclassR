@@ -104,6 +104,11 @@ MACRO_CONFIG_INT(InfSpyKillDemand, inf_spy_kill_demand, 3, 0, 10000, CFGFLAG_SER
 MACRO_CONFIG_INT(InfSpyInitialDamage, inf_spy_initial_damage, 2, 0, 10000, CFGFLAG_SERVER, "Spy initial damage")
 MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 4, 0, 10000, CFGFLAG_SERVER, "Spy max damage")
 
+// [Architect]
+MACRO_CONFIG_INT(InfArchitectRifleForce, inf_architect_rifle_force, 1, 0, 10000, CFGFLAG_SERVER, "Architect rifle force")
+MACRO_CONFIG_INT(InfArchitectLauncherRange, inf_architect_launcher_range, 5, 0, 10000, CFGFLAG_SERVER, "Architect launcher range")
+MACRO_CONFIG_INT(InfArchitectLauncherRecovery, inf_architect_launcher_recovery, 5, 0, 10000, CFGFLAG_SERVER, "For how long Architect's launcher recover ammo (in seconds)")
+
 MACRO_CONFIG_INT(InfSpiderHookTime, inf_spider_hook_time, 3, 1, 10000, CFGFLAG_SERVER, "For how long spiders will be able to hook humans (in seconds)")
 MACRO_CONFIG_INT(InfSmokerHookDamage, inf_smoker_hook_damage, 3, 1, 10000, CFGFLAG_SERVER, "Damage taken by smoker (hook)")
 MACRO_CONFIG_INT(InfSpiderCatchHumans, inf_spider_catch_humans, 1, 0, 1, CFGFLAG_SERVER, "Always catch humans with hook")
@@ -131,6 +136,7 @@ MACRO_CONFIG_INT(InfEnableNinja, inf_enable_ninja, 1, 0, 1, CFGFLAG_SERVER, "Mak
 MACRO_CONFIG_INT(InfEnableMedic, inf_enable_medic, 1, 0, 1, CFGFLAG_SERVER, "Makes the medic class available")
 MACRO_CONFIG_INT(InfEnableHero, inf_enable_hero, 1, 0, 1, CFGFLAG_SERVER, "Makes the hero class available")
 MACRO_CONFIG_INT(InfEnableSpy, inf_enable_spy, 1, 0, 1, CFGFLAG_SERVER, "Makes the spy class available")
+MACRO_CONFIG_INT(InfEnableArchitect, inf_enable_architect, 1, 0, 1, CFGFLAG_SERVER, "Makes the architect class available")
 
 MACRO_CONFIG_INT(InfHeroFlagIndicator, inf_hero_flag_indicator, 1, 0, 1, CFGFLAG_SERVER, "Shows the heros in which direction the next flag is")
 MACRO_CONFIG_INT(InfHeroFlagIndicatorTime, inf_hero_flag_indicator_time, 3, 0, 1000, CFGFLAG_SERVER, "How many seconds the hero has to stand still until the indicator is shown")

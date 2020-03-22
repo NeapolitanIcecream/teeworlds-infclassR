@@ -310,6 +310,9 @@ void CPlayer::Snap(int SnappingClient)
 				case PLAYERCLASS_SPY:
 					str_format(aClanName, sizeof(aClanName), "%sSpy", Server()->IsClientLogged(GetCID()) ? "@" : " ");
 					break;
+				case PLAYERCLASS_ARCHITECT:
+					str_format(aClanName, sizeof(aClanName), "%sArchitect", Server()->IsClientLogged(GetCID()) ? "@" : " ");
+					break;
 				case PLAYERCLASS_SMOKER:
 					str_format(aClanName, sizeof(aClanName), "%sSmoker", Server()->IsClientLogged(GetCID()) ? "@" : " ");
 					break;
@@ -659,6 +662,10 @@ void CPlayer::SetClassSkin(int newClass, int State)
 		case PLAYERCLASS_SPY:
 			m_TeeInfos.m_UseCustomColor = 0;
 			str_copy(m_TeeInfos.m_SkinName, "warpaint", sizeof(m_TeeInfos.m_SkinName));
+			break;
+		case PLAYERCLASS_ARCHITECT:
+			m_TeeInfos.m_UseCustomColor = 0;
+			str_copy(m_TeeInfos.m_SkinName, "whis", sizeof(m_TeeInfos.m_SkinName));
 			break;
 		case PLAYERCLASS_SMOKER:
 			m_TeeInfos.m_UseCustomColor = 1;
