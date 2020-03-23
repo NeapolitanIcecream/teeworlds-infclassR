@@ -102,7 +102,7 @@ MACRO_CONFIG_INT(InfSpyHideRecover, inf_spy_hide_recover, 15, 0, 10000, CFGFLAG_
 MACRO_CONFIG_INT(InfSpyKillBonus, inf_spy_kill_bonus, 1, 0, 10000, CFGFLAG_SERVER, "Damage improvement from kill bonus")
 MACRO_CONFIG_INT(InfSpyKillDemand, inf_spy_kill_demand, 3, 0, 10000, CFGFLAG_SERVER, "For how many kills spy can get bonus")
 MACRO_CONFIG_INT(InfSpyInitialDamage, inf_spy_initial_damage, 2, 0, 10000, CFGFLAG_SERVER, "Spy initial damage")
-MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 4, 0, 10000, CFGFLAG_SERVER, "Spy max damage")
+MACRO_CONFIG_INT(InfSpyMaxDamage, inf_spy_max_damage, 8, 0, 10000, CFGFLAG_SERVER, "Spy max damage")
 
 // [Architect]
 MACRO_CONFIG_INT(InfArchitectRifleDamage, inf_architect_rifle_damage, 1, 0, 10000, CFGFLAG_SERVER, "Architect rifle damage")
