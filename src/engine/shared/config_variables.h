@@ -111,7 +111,7 @@ MACRO_CONFIG_INT(InfArchitectRifleAmmo, inf_architect_rifle_ammo, 40, 0, 10000, 
 MACRO_CONFIG_INT(InfArchitectGrenadeAmmo, inf_architect_grenade_ammo, 1, 0, 10000, CFGFLAG_SERVER, "Architect grenade ammo") // Deprecated
 MACRO_CONFIG_INT(InfArchitectGrenadeDamage, inf_architect_grenade_damage, 10, 0, 10000, CFGFLAG_SERVER, "Architect grenade damage")
 MACRO_CONFIG_INT(InfArchitectGrenadeForce, inf_architect_grenade_force, 100, 0, 10000, CFGFLAG_SERVER, "Architect grenade force")
-MACRO_CONFIG_INT(InfArchitectGrenadeRange, inf_architect_grenade_range, 100, 0, 10000, CFGFLAG_SERVER, "Architect grenade range")
+MACRO_CONFIG_INT(InfArchitectGrenadeRange, inf_architect_grenade_range, 200, 0, 10000, CFGFLAG_SERVER, "Architect grenade range")
 MACRO_CONFIG_INT(InfArchitectGrenadeRecovery, inf_architect_grenade_recovery, 5, 0, 10000, CFGFLAG_SERVER, "For how long Architect's grenade recover ammo (in seconds)") // Deprecated
 
 MACRO_CONFIG_INT(InfSpiderHookTime, inf_spider_hook_time, 3, 1, 10000, CFGFLAG_SERVER, "For how long spiders will be able to hook humans (in seconds)")
