@@ -130,15 +130,27 @@ void CProjectile::Tick()
 		else if(m_Explosive)
 		{
 			int OwnerClass = OwnerChar->GetClass();
+
+			GameServer()->CreateExplosion(CurPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
+
 			if (OwnerClass == PLAYERCLASS_ARCHITECT)
 			{
-				GameServer()->CreateExplosionDisk(CurPos, float(g_Config.m_InfArchitectGrenadeRange), float(g_Config.m_InfArchitectGrenadeRange) * 1.5f, g_Config.m_InfArchitectGrenadeDamage, float(g_Config.m_InfArchitectGrenadeForce), m_Owner, m_Weapon, m_TakeDamageMode);
+				int radius = g_Config.m_InfArchitectGrenadeRange / 90;
+
+				for (int i = 1; i <= radius; i++)
+				{
+					int number = 6 * i;
+					float distance = i * 90f;
+
+					for (int j = 0; j < number; j++)
+					{
+						float angle = static_cast<float>(j)*2.0*pi/number;
+
+						vec2 expPos = m_Pos + vec2(distance*cos(angle), distance*sin(angle));
+						GameServer()->CreateExplosion(expPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
+					}
+				}
 			}
-			else
-			{
-				GameServer()->CreateExplosion(CurPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
-			}
-			
 		}
 		else if(TargetChr)
 		{
