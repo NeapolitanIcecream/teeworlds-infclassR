@@ -140,7 +140,7 @@ void CProjectile::Tick()
 				for (int i = 1; i <= radius; i++)
 				{
 					int number = 6 * i;
-					float distance = i * 90f;
+					float distance = i * 90;
 
 					for (int j = 0; j < number; j++)
 					{
