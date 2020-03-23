@@ -146,7 +146,7 @@ void CProjectile::Tick()
 					{
 						float angle = static_cast<float>(j)*2.0*pi/number;
 
-						vec2 expPos = m_Pos + vec2(distance*cos(angle), distance*sin(angle));
+						vec2 expPos = CurPos + vec2(distance*cos(angle), distance*sin(angle));
 						GameServer()->CreateExplosion(expPos, m_Owner, m_Weapon, false, m_TakeDamageMode);
 					}
 				}
